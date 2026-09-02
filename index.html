@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jappaly - Two Culture in One</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="onboarding-screen" class="screen active">
+    <div class="glass-card title-card">
+      <h1>Jappaly</h1>
+      <p class="subtitle">Two Culture in One</p>
+      <div class="profile-buttons">
+        <button class="btn-profile" onclick="selectProfile('it')">
+          <span class="flag">🇮🇹 ➔ 🇯🇵</span>
+          <strong>Sono Italiano</strong>
+          <small>Voglio imparare il Giapponese</small>
+        </button>
+        <button class="btn-profile" onclick="selectProfile('ja')">
+          <span class="flag">🇯🇵 ➔ 🇮🇹</span>
+          <strong>私は日本人です</strong>
+          <small>イタリア語を学びたい</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="app-screen" class="screen">
+    <header class="glass-card header-bar">
+      <div>
+        <h2 id="app-title">Jappaly</h2>
+        <span id="user-badge" class="badge">--</span>
+      </div>
+      <button class="btn-secondary" onclick="resetProfile()">🔄 Profilo</button>
+    </header>
+
+    <section class="glass-card tracker-section">
+      <div class="tracker-header">
+        <span id="progress-text">Parole imparate: 0 / 2000 (0%)</span>
+      </div>
+      <div class="river-container">
+        <div class="river-bank start">Riva</div>
+        <div class="river">
+          <div id="koi-fish" class="koi" style="left: 0%;">🎏</div>
+        </div>
+        <div class="river-bank end">Padronanza 🌸</div>
+      </div>
+    </section>
+
+    <nav class="nav-tabs">
+      <button id="tab-cards" class="tab-btn active" onclick="switchTab('cards')">🃏 Flashcards</button>
+      <button id="tab-kana" class="tab-btn" onclick="switchTab('kana')">🔤 Sillabario / Basi</button>
+    </nav>
+
+    <main id="section-cards" class="tab-content active">
+      <div class="flashcard-container" onclick="flipCard()">
+        <div class="flashcard-inner" id="cardInner">
+          
+          <div class="flashcard-front glass-card">
+            <div class="image-wrapper">
+              <img id="card-image" src="" alt="Caricamento immagine...">
+            </div>
+            <h2 id="card-front-word">...</h2>
+            <p class="tap-hint">👆 Tlocca per girare</p>
+          </div>
+          
+          <div class="flashcard-back glass-card">
+            <button class="btn-audio" onclick="event.stopPropagation(); playAudio();">🔊 Ascolta Pronuncia</button>
+            <h1 id="card-back-main">...</h1>
+            <h3 id="card-back-sub">...</h3>
+            <div class="sentence-box">
+              <p id="card-example">...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="srs-controls">
+        <button class="btn-srs wrong" onclick="submitAnswer(false)">❌ Ancora (Sbagliato)</button>
+        <button class="btn-srs easy" onclick="submitAnswer(true)">✅ Memorizzata (Facile)</button>
+      </div>
+    </main>
+
+    <section id="section-kana" class="tab-content glass-card">
+      <h3 id="kana-title">Sillabario & Guida</h3>
+      <p id="kana-desc">Seleziona un carattere per ascoltarne la pronuncia corretta:</p>
+      <div id="kana-grid" class="kana-grid">
+        </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
