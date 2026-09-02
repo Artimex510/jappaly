@@ -180,7 +180,7 @@
       <p class="tap-hint">Tocca per ascoltare la pronuncia</p>
       <div id="katakana-grid" class="kana-grid"></div>
     </section>
-    <!-- Sezione: Frasario -->
+        <!-- Nuova Sezione: Frasario -->
     <section id="section-phrasebook" class="tab-content glass-card">
       <h3 id="phrasebook-title">📚 Frasario / フレーズ集</h3>
       
@@ -200,10 +200,6 @@
         <!-- Barra di ricerca testuale -->
         <input type="text" id="phrase-search" placeholder="Cerca una frase..." onkeyup="filterPhrases()" class="phrase-input search-bar">
       </div>
-        
-        <!-- Barra di ricerca originale (affiancata) -->
-        <input type="text" id="phrase-search" placeholder="Cerca una frase..." onkeyup="filterPhrases()" style="flex: 1; min-width: 200px; padding: 10px 15px; border-radius: 20px; border: 1px solid #ccc; font-size: 16px; outline: none;">
-      </div>
 
       <div id="phrasebook-container" class="phrasebook-grid">
         <!-- Le frasi verranno caricate qui dal JavaScript -->
@@ -214,20 +210,19 @@
     <section id="useful-links-section" class="glass-card" style="margin-top: 30px; text-align: center;">
       <h3 id="links-title">Link utili per l'apprendimento</h3>
       
-      <!-- Link per Italiani che studiano Giapponese -->
       <div id="links-it" class="learning-links">
         <a href="https://www.nhk.or.jp/lesson/italian/" target="_blank" class="btn-secondary">NHK World (Corso Gratuito)</a>
         <a href="https://jisho.org" target="_blank" class="btn-secondary">Jisho.org (Dizionario Kanji)</a>
         <a href="https://minato-jf.jp/" target="_blank" class="btn-secondary">Minato (Japan Foundation)</a>
       </div>
 
-      <!-- Link per Giapponesi che studiano Italiano -->
       <div id="links-ja" class="learning-links" style="display: none;">
         <a href="https://www.oneworlditaliano.com/giapponese/" target="_blank" class="btn-secondary">One World Italiano (無料コース)</a>
         <a href="https://www.iluss.it/free_ita.html" target="_blank" class="btn-secondary">ILUSS (イタリア語の文法)</a>
       </div>
     </section>
-  </div>
+
+  </div> 
 
   <script src="frasi.js"></script>
   <script src="app.js"></script>
