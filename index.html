@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jappaly - Two Culture in One</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Schermata Selezione Profilo -->
+  <div id="onboarding-screen" class="screen active">
+    <div class="glass-card title-card">
+      <h1>Jappaly</h1>
+      <p class="subtitle">Two Culture in One</p>
+      <div class="profile-buttons">
+        <button class="btn-profile" onclick="selectProfile('it')">
+          <span class="flag">🇮🇹 ➔ 🇯🇵</span>
+          <strong>Sono Italiano</strong>
+          <small>Voglio imparare il Giapponese</small>
+        </button>
+        <button class="btn-profile" onclick="selectProfile('ja')">
+          <span class="flag">🇯🇵 ➔ 🇮🇹</span>
+          <strong>私は日本人です</strong>
+          <small>イタリア語を学びたい</small>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schermata Principale App -->
+  <div id="app-screen" class="screen">
+    <header class="glass-card header-bar">
+      <div>
+        <h2 id="app-title">Jappaly</h2>
+        <span id="user-badge" class="badge">--</span>
+      </div>
+      <button class="btn-secondary" onclick="resetProfile()">🔄 Profilo</button>
+    </header>
+
+    <!-- Visual Tracker: Il Fiume e la Carpa Koi -->
+    <section class="glass-card tracker-section">
+      <div class="tracker-header">
+        <span id="progress-text">Parole imparate: 0 / 2000 (0%)</span>
+      </div>
+      <div class="river-container">
+        <div class="river-bank start">Riva</div>
+        <div class="river">
+          <div id="koi-fish" class="koi" style="left: 0%;">🎏</div>
+        </div>
+        <div class="river-bank end">Padronanza 🌸</div>
+      </div>
+    </section>
+
+    <!-- Tab di Navigazione -->
+    <nav class="nav-tabs">
+      <button id="tab-cards" class="tab-btn active" onclick="switchTab('cards')">🃏 Flashcards</button>
+      <button id="tab-hiragana" class="tab-btn" onclick="switchTab('hiragana')">あ Hiragana</button>
+      <button id="tab-katakana" class="tab-btn" onclick="switchTab('katakana')">ア Katakana</button>
+      <button class="nav-btn" onclick="switchTab('section-grammar')">Grammatica & Verbi</button>
+    </nav>
+
+    <!-- Sezione 1: Flashcards -->
+    <main id="section-cards" class="tab-content active">
+      <div class="controls-top">
+        <label class="toggle-romaji">
+          <input type="checkbox" id="romaji-toggle" checked onchange="toggleRomaji()">
+          Mostra Romaji
+        </label>
+      </div>
+      
+      <div class="flashcard-container" onclick="flipCard()">
+        <div class="flashcard-inner" id="cardInner">
+          
+          <!-- FRONTE -->
+          <div class="flashcard-front glass-card">
+            <div class="image-wrapper">
+              <img id="card-image" src="" alt="Caricamento immagine...">
+            </div>
+            <h2 id="card-front-word">...</h2>
+            <p class="tap-hint">👆 Tocca per girare</p>
+          </div>
+          
+          <!-- RETRO -->
+          <div class="flashcard-back glass-card">
+            <button class="btn-audio" onclick="event.stopPropagation(); playAudio();">🔊 Ascolta Pronuncia</button>
+            <h1 id="card-back-main">...</h1>
+            <h3 id="card-back-sub">...</h3>
+            <div class="sentence-box">
+              <p id="card-example">...</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Controlli Risposta (SRS) -->
+      <div class="srs-controls">
+        <button class="btn-srs wrong" onclick="submitAnswer(false)">❌ Ancora</button>
+        <button class="btn-srs easy" onclick="submitAnswer(true)">✅ Memorizzata</button>
+      </div>
+    </main>
+
+    <section id="section-grammar" class="tab-content glass-card" style="display: none;">
+  <div class="grammar-container">
+    <h2>Palestra dei Verbi</h2>
+    <p>Seleziona un verbo per generare automaticamente tutte le sue coniugazioni e testarlo in una frase.</p>
+    
+    <div class="verb-selector">
+      <select id="verb-dropdown" onchange="generateConjugations()">
+        <option value="">Seleziona un verbo...</option>
+        <!-- I verbi verranno caricati qui da JavaScript -->
+      </select>
+    </div>
+
+    <div id="conjugation-board" style="display: none;">
+      <div class="conjugation-grid">
+        <div class="conj-card positive">
+          <h3>Presente Positivo</h3>
+          <p id="conj-pres-pos" class="ja-text"></p>
+          <span class="it-translation">Mangio / Mangerò</span>
+        </div>
+        <div class="conj-card negative">
+          <h3>Presente Negativo</h3>
+          <p id="conj-pres-neg" class="ja-text"></p>
+          <span class="it-translation">Non mangio</span>
+        </div>
+        <div class="conj-card past-pos">
+          <h3>Passato Positivo</h3>
+          <p id="conj-past-pos" class="ja-text"></p>
+          <span class="it-translation">Ho mangiato</span>
+        </div>
+        <div class="conj-card past-neg">
+          <h3>Passato Negativo</h3>
+          <p id="conj-past-neg" class="ja-text"></p>
+          <span class="it-translation">Non ho mangiato</span>
+        </div>
+        <div class="conj-card volitional">
+          <h3>Forma Desiderativa (Tai)</h3>
+          <p id="conj-tai" class="ja-text"></p>
+          <span class="it-translation">Voglio mangiare</span>
+        </div>
+      </div>
+
+      <div class="tatoeba-practice">
+        <h3>Testa nella frase (Powered by Tatoeba)</h3>
+        <button id="fetch-sentence-btn" onclick="fetchTatoebaSentence()">Genera frase da completare</button>
+        <div id="sentence-box" style="display: none;">
+          <p id="ja-sentence" class="ja-text"></p>
+          <p id="it-sentence" class="it-translation"></p>
+          <button onclick="revealSentenceVerb()">Mostra Verbo Nascosto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Sezione 2: Hiragana -->
+    <section id="section-hiragana" class="tab-content glass-card">
+      <h3>Sillabario Hiragana</h3>
+      <p class="tap-hint">Tocca per ascoltare la pronuncia</p>
+      <div id="hiragana-grid" class="kana-grid"></div>
+    </section>
+
+    <!-- Sezione 3: Katakana -->
+    <section id="section-katakana" class="tab-content glass-card">
+      <h3>Sillabario Katakana</h3>
+      <p class="tap-hint">Tocca per ascoltare la pronuncia</p>
+      <div id="katakana-grid" class="kana-grid"></div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
